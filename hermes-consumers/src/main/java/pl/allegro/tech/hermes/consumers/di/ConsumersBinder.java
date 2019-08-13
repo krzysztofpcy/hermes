@@ -76,6 +76,8 @@ import pl.allegro.tech.hermes.consumers.supervisor.workload.SupervisorController
 import pl.allegro.tech.hermes.consumers.supervisor.workload.SupervisorControllerFactory;
 import pl.allegro.tech.hermes.consumers.supervisor.workload.WorkTracker;
 import pl.allegro.tech.hermes.consumers.supervisor.workload.WorkTrackerFactory;
+import pl.allegro.tech.hermes.consumers.supervisor.workload.constraints.WorkloadConstraintsRepository;
+import pl.allegro.tech.hermes.consumers.supervisor.workload.constraints.WorkloadConstraintsRepositoryFactory;
 
 import javax.inject.Singleton;
 import javax.jms.Message;
@@ -127,6 +129,7 @@ public class ConsumersBinder extends AbstractBinder {
         bindFactory(SubscriptionCacheFactory.class).in(Singleton.class).to(SubscriptionsCache.class);
         bindSingleton(SubscriptionAssignmentCache.class);
 
+        bindFactory(WorkloadConstraintsRepositoryFactory.class).in(Singleton.class).to(WorkloadConstraintsRepository.class);
         bindFactory(UndeliveredMessageLogFactory.class).in(Singleton.class).to(UndeliveredMessageLog.class);
         bindFactory(WorkTrackerFactory.class).in(Singleton.class).to(WorkTracker.class);
         bindFactory(SubscriptionAssignmentRegistryFactory.class).in(Singleton.class)
