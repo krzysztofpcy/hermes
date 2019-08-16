@@ -32,7 +32,7 @@ public class ZookeeperWorkloadConstraintsRepository extends ZookeeperBasedReposi
                             final byte[] data = zookeeper.getData().forPath(nodePath);
                             if (ArrayUtils.isNotEmpty(data)) {
                                 final Constraints constraints = mapper.readValue(data, Constraints.class);
-                                if (childrenPath.contains("$")) {
+                                if (isSubscription(childrenPath)) {
                                     workloadConstraints.getSubscriptionConstraints()
                                             .put(SubscriptionName.fromString(childrenPath), constraints);
                                 } else {
@@ -48,5 +48,9 @@ public class ZookeeperWorkloadConstraintsRepository extends ZookeeperBasedReposi
             logger.warn("Error while reading path {}", paths.consumersWorkloadConstraintsPath(), e);
         }
         return workloadConstraints;
+    }
+
+    private boolean isSubscription(String path) {
+        return path.contains("$");
     }
 }
