@@ -82,7 +82,7 @@ public class ZookeeperWorkloadConstraintsRepositoryTest extends ZookeeperBaseTes
     }
 
     @Test
-    public void shouldLogWarnInfoInCaseOfMalformedDataInZookeeperNodeTest() throws Exception {
+    public void shouldLogWarnMessageIfDataFromZNodeCannotBeReadTest() throws Exception {
         // given
         setupPath("/hermes/consumers-workload-constraints/group.topic", "random data");
 

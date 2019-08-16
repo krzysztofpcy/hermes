@@ -1,7 +1,6 @@
 package pl.allegro.tech.hermes.consumers.supervisor.workload.constraints;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +10,8 @@ import pl.allegro.tech.hermes.infrastructure.zookeeper.ZookeeperBasedRepository;
 import pl.allegro.tech.hermes.infrastructure.zookeeper.ZookeeperPaths;
 
 import java.util.HashMap;
+
+import static org.apache.commons.lang.ArrayUtils.isNotEmpty;
 
 public class ZookeeperWorkloadConstraintsRepository extends ZookeeperBasedRepository implements WorkloadConstraintsRepository {
 
@@ -30,7 +31,7 @@ public class ZookeeperWorkloadConstraintsRepository extends ZookeeperBasedReposi
                         String nodePath = String.format("%s/%s", paths.consumersWorkloadConstraintsPath(), childrenPath);
                         try {
                             final byte[] data = zookeeper.getData().forPath(nodePath);
-                            if (ArrayUtils.isNotEmpty(data)) {
+                            if (isNotEmpty(data)) {
                                 final Constraints constraints = mapper.readValue(data, Constraints.class);
                                 if (isSubscription(childrenPath)) {
                                     workloadConstraints.getSubscriptionConstraints()
