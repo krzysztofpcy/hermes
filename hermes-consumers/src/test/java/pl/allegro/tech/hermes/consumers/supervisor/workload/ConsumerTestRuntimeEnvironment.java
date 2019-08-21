@@ -107,7 +107,7 @@ class ConsumerTestRuntimeEnvironment {
                 curator, executorService, paths.consumersRegistryPath(CLUSTER_NAME), "id",
                 DEATH_OF_CONSUMER_AFTER_SECONDS, Clock.systemDefaultZone());
 
-        this.workloadConstraintsRepository = new ZookeeperWorkloadConstraintsRepository(curator, objectMapper, paths);
+        this.workloadConstraintsRepository = new ZookeeperWorkloadConstraintsRepository(curator, objectMapper, paths, 5);
 
         this.metricsSupplier = () -> new HermesMetrics(new MetricRegistry(), new PathsCompiler("localhost"));
 

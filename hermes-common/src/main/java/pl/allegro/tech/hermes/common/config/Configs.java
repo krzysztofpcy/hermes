@@ -221,6 +221,7 @@ public enum Configs {
     CONSUMER_WORKLOAD_MONITOR_SCAN_INTERVAL("consumer.workload.monitor.scan.interval.seconds", 120),
     CONSUMER_WORKLOAD_AUTO_REBALANCE("consumer.workload.rebalance.auto", true),
     CONSUMER_WORKLOAD_DEAD_AFTER_SECONDS("consumer.workload.dead.after.seconds", 120),
+    CONSUMER_WORKLOAD_CONSTRAINTS_PATHS_CACHE_EXPIRE_AFTER("consumer.workload.constraints.paths.cache.expire.after.min", 5),
     CONSUMER_BATCH_POOLABLE_SIZE("consumer.batch.poolable.size", 1024),
     CONSUMER_BATCH_MAX_POOL_SIZE("consumer.batch.max.pool.size", 64 * 1024 * 1024),
     CONSUMER_BATCH_CONNECTION_TIMEOUT("consumer.batch.connection.timeout", 500),

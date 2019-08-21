@@ -17,16 +17,19 @@ public class ZookeeperWorkloadConstraintsRepository extends ZookeeperBasedReposi
 
     private static final Logger logger = LoggerFactory.getLogger(ZookeeperWorkloadConstraintsRepository.class);
 
-    public ZookeeperWorkloadConstraintsRepository(CuratorFramework zookeeper, ObjectMapper mapper, ZookeeperPaths paths) {
+    private final ZookeeperPathChildrenCache pathChildrenCache;
+
+    public ZookeeperWorkloadConstraintsRepository(CuratorFramework zookeeper, ObjectMapper mapper, ZookeeperPaths paths,
+                                                  int pathsCacheExpireAfterMinutes) {
         super(zookeeper, mapper, paths);
+        this.pathChildrenCache = new ZookeeperPathChildrenCache(zookeeper, pathsCacheExpireAfterMinutes);
     }
 
     @Override
     public ConsumersWorkloadConstraints getConsumersWorkloadConstraints() {
         ConsumersWorkloadConstraints workloadConstraints = new ConsumersWorkloadConstraints(new HashMap<>(), new HashMap<>());
         try {
-            zookeeper.getChildren()
-                    .forPath(paths.consumersWorkloadConstraintsPath())
+            pathChildrenCache.getChildrenPaths(paths.consumersWorkloadConstraintsPath())
                     .forEach(childrenPath -> {
                         String nodePath = String.format("%s/%s", paths.consumersWorkloadConstraintsPath(), childrenPath);
                         try {

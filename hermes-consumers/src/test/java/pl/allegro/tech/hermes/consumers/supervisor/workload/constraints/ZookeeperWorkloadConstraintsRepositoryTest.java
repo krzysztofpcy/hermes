@@ -21,7 +21,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class ZookeeperWorkloadConstraintsRepositoryTest extends ZookeeperBaseTest {
 
     private ZookeeperWorkloadConstraintsRepository repository =
-            new ZookeeperWorkloadConstraintsRepository(zookeeperClient, new ObjectMapper(), new ZookeeperPaths("/hermes"));
+            new ZookeeperWorkloadConstraintsRepository(zookeeperClient, new ObjectMapper(), new ZookeeperPaths("/hermes"), 1);
 
     private Logger logger;
     private ListAppender<ILoggingEvent> listAppender;
